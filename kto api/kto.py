@@ -2,20 +2,17 @@ from pkg_resources import safe_extra
 import requests
 import json
 import uuid
-SERVICE_KEY = "6NR7LnUGxVR7fh6Sm5NtxMg9da+aeo51Zxp6SZM5q4tszS5vtg9eysqZTxlKkIAQed87P/CFsk4KkbNAgfWQXg=="
-
-# Pintween's SERVICE_KEY
-# SERVICE_KEY = ""
 
 def save_json(data, filename):
     with open(filename, "a", encoding="UTF-8") as fileout:
         json.dump(data, fileout, ensure_ascii=False, indent=4)
 
-
 def load_json(file_name):
     with open(file_name) as json_file:
         return json.load(json_file)
 
+SECRETS = load_json('secrets.json')
+SERVICE_KEY = SECRETS['SECRET_KEY']
 
 def get_areacode():
     url = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaCode'
